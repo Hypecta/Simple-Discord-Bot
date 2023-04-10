@@ -6,7 +6,9 @@ from discord.ext import commands
 bad_words consist of the words that are prohibited
 - mommy
 """
-bad_words = [r"\bm{1,}[ou0]{1,}mm{1,}y\b"]
+bad_words = [
+    r"m{1,}[ou0]{1,}m{1,}y", # Matches 'mommy' variations
+    ]
 
 # Import Environment Variables
 load_dotenv()
@@ -28,7 +30,7 @@ async def on_message(message):
         return
     
     # Match new message from bad_words list
-    if re.match(pattern="(" + ")|(".join(bad_words) + ")", string=message.content.lower().translate({ord(c): None for c in string.whitespace}), flags=re.IGNORECASE):
+    if re.search(pattern="(" + ")|(".join(bad_words) + ")", string=message.content.lower().translate({ord(c): None for c in string.whitespace}), flags=re.IGNORECASE):
         await message.channel.send(f'{message.author.mention} FUCK YOU DEGENERATE SCUM. YOU WASTE OF GOVERNMENT TAX PAYER MONEY. FORTNIGHTLY PAYMENT PIECE OF SHIT GO AND MAKE SOME CONTRIBUTIONS TO SOCIETY.')
 
     # good/bad bot prompts

@@ -1,7 +1,6 @@
 # Simple Discord Bot :D
 
- A simple discord bot to react to stinky messages!!
-
+ A simple silly discord bot to react to your stinky messages!!
 
 ## Silly Features :P
 
@@ -11,15 +10,19 @@
 
 ## Remember to do this!
 
-The `requirements.txt` file lists the Python libraries required to run this discord bot:
+The `requirements.txt` file lists the Python libraries required to run it:
 ```bash
 pip install -r requirements.txt
 ```
 
-To run this project, you will need to add the `BOT_TOKEN` to your .env file
+To run this project, you will need to add the `BOT_TOKEN` to your `.env` file
 
-In case you are unable to find the `BOT_TOKEN`, follow [this guide](https://docs.discordbotstudio.org/setting-up-dbs/finding-your-bot-token)!
+In case you are unable to find your `BOT_TOKEN`, follow [this guide](https://docs.discordbotstudio.org/setting-up-dbs/finding-your-bot-token)!
 
+## Future Ideas :^)
+- Implement profanity word matching with [better-profanity](https://pypi.org/project/better-profanity/)
+- Issue timeout/warnings
+- Log & collect repeated offences from users
 
 ### Look at my bot go!
 ![](https://cdn.discordapp.com/attachments/1094887411986739270/1094889738340683857/image.png)
