@@ -4,11 +4,11 @@ from discord.ext import commands
 
 """
 bad_words consist of the words that are prohibited
-- mommy/mother
+- mommy
 """
 bad_words = [
-    r"m{1,}[ou0]{1,}m{1,}[a@]{0,}y", # Matches 'mommy' variations
-    r"m{1,}[ou0]{1,}th[e3]{1,}r",  # Matches 'mother' variations
+    #r"m{1,}[ou0]{1,}m{1,}y", # Matches 'mommy' variations
+    r"d{1,}[@a]{1,}d{1,}y"
     ]
 
 # Import Environment Variables
@@ -36,13 +36,13 @@ async def on_message(message):
 
     # good/bad bot prompts
     if "good bot" in message.content.lower():
-        await message.channel.send(f'<a:peepoblushshake:1050640802533093416>')
+        await message.channel.send(f'<:OkayChamp:837353399124492328>')
 
     if "bad bot" in message.content.lower():
-        await message.channel.send(f'<a:Blubbers:1000378228483031162>')
+        await message.channel.send(f'<:donkSad:837353022145298462>')
     
     # When bot is @'d
     if bot.user.mentioned_in(message):
-        await message.add_reaction(f'<:reallyinnocent:1094866016691036260>')
+        await message.add_reaction(f'<:4WeirdW:837351889531437077>')
 
-bot.run(os.getenv('BOT_TOKEN'))
+bot.run(os.getenv('BOT_TOKEN2'))
