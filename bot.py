@@ -1,19 +1,22 @@
-import asyncio
-
-import discord, string, re, os
+import discord, string, re, os, asyncio, random
 from dotenv import load_dotenv
 from discord.ext import commands
 
 from cogs.fun import Fun
 
-"""
-bad_words consist of the words that are prohibited
-- mommy/mother
-"""
+'''bad_words consist of the words that are prohibited'''
 bad_words = [
     r"m{1,}[ou0]{1,}m{1,}[a@]{0,}y", # Matches 'mommy' variations
     r"m{1,}[ou0]{1,}th[e3]{1,}r",  # Matches 'mother' variations
     ]
+
+'''List of reaction emotes'''
+good_bot_emotes = [f'<:DonkHappy:1000485972305268806>', f'<:peepoHappylove:981514778608558080>', f'<a:peepoblushshake:1050640802533093416>']
+
+bad_bot_emotes = [f'<:donkSad:981514780365951006>', f'<a:jul:1090654116436516904>', f'<a:Blubbers:1000378228483031162>']
+
+'''Bot Variables'''
+pings = {"counter": 0, "channel": None}
 
 # Import Environment Variables
 load_dotenv()
@@ -43,14 +46,24 @@ async def on_message(message):
 
     # good/bad bot prompts
     if "good bot" in message.content.lower():
-        await message.channel.send(f'<a:peepoblushshake:1050640802533093416>')
+        await message.add_reaction(random.choice(good_bot_emotes))
 
     if "bad bot" in message.content.lower():
-        await message.channel.send(f'<a:Blubbers:1000378228483031162>')
+        await message.add_reaction(random.choice(bad_bot_emotes))
     
     # When bot is @'d
     if bot.user.mentioned_in(message):
-        await message.add_reaction(f'<:reallyinnocent:1094866016691036260>')
+        pings["counter"] += 1
+        if message.channel == pings["channel"]:
+            if pings["counter"] > 2:
+                await message.add_reaction(f'<a:pinged:1095633681852412004>')
+            else:
+                await message.add_reaction(f'<:reallyinnocent:1094866016691036260>')
+        else:
+            pings["channel"] = message.channel
+            await message.add_reaction(f'<:reallyinnocent:1094866016691036260>')
+    else:
+        pings["counter"] = 0
 
     await bot.process_commands(message)
 
