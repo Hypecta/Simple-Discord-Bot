@@ -4,10 +4,12 @@ from discord.ext import commands
 
 """
 bad_words consist of the words that are prohibited
-- mommy
+- mommy/mother
 """
 bad_words = [
     r"m{1,}[ou0]{1,}m{1,}y", # Matches 'mommy' variations
+    r"m{1,}[ou0]{1,}m{1,}[a@]{0,}y", # Matches 'mommy' variations
+    r"m{1,}[ou0]{1,}th[e3]{1,}r",  # Matches 'mother' variations
     ]
 
 # Import Environment Variables
