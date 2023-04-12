@@ -1,6 +1,10 @@
+import asyncio
+
 import discord, string, re, os
 from dotenv import load_dotenv
 from discord.ext import commands
+
+from cogs.fun import Fun
 
 """
 bad_words consist of the words that are prohibited
@@ -18,7 +22,10 @@ load_dotenv()
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
-bot = commands.Bot(command_prefix="", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+# List of cogs to load
+extensions = [Fun]
 
 @bot.event
 async def on_ready():
@@ -45,4 +52,17 @@ async def on_message(message):
     if bot.user.mentioned_in(message):
         await message.add_reaction(f'<:reallyinnocent:1094866016691036260>')
 
-bot.run(os.getenv('BOT_TOKEN'))
+    await bot.process_commands(message)
+
+async def main():
+    for extension in extensions:
+        try:
+            cog = extension(bot)
+            print(f"Loading {type(cog).__name__}")
+            await bot.add_cog(cog)
+        except Exception as e:
+            print(type(e).__name__, str(e))
+    await bot.start(os.getenv('BOT_TOKEN', ""))
+
+if __name__ == "__main__":
+    asyncio.run(main())
