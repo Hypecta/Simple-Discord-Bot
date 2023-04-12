@@ -55,9 +55,10 @@ async def on_message(message):
     await bot.process_commands(message)
 
 async def main():
+    # Load bot extensions
     for extension in extensions:
         try:
-            cog = extension(bot)
+            cog = extension(bot, bad_words)
             print(f"Loading {type(cog).__name__}")
             await bot.add_cog(cog)
         except Exception as e:

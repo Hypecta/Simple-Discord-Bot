@@ -1,13 +1,20 @@
+import string, re
 from discord.ext import commands
 import numpy as np
 
 class Fun(commands.Cog, name="Fun"):
     '''Fun commands'''
-    def __init__(self, bot):
+    def __init__(self, bot, bad_words):
         self.bot = bot
+        self.bad_words = bad_words
 
     @commands.command()
     async def box(self, ctx, *, sentence: str):
+
+        # if bad words match
+        if re.search(pattern="(" + ")|(".join(self.bad_words) + ")", string=sentence.lower().translate({ord(c): None for c in string.whitespace}), flags=re.IGNORECASE):
+            return
+        
         '''Creates a box'''
         if len(sentence) % 2 == 1:
             diags = len(sentence) // 2 // 2
@@ -18,6 +25,7 @@ class Fun(commands.Cog, name="Fun"):
             " ",
             dtype=str
         )
+        
         # do the first 4 edges
         ret[0, :len(sentence)] = list(sentence)
         ret[:len(sentence), 0] = list(sentence)
