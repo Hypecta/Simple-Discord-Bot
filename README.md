@@ -25,4 +25,4 @@ In case you are unable to find your `BOT_TOKEN`, follow [this guide](https://doc
 - Log & collect repeated offences from users
 
 ### Look at my bot go!
-![](https://cdn.discordapp.com/attachments/1094887411986739270/1094889738340683857/image.png)
+![](https://cdn.discordapp.com/attachments/1094911481520345138/1095579827915980911/image.png)
